@@ -22,16 +22,25 @@ ul {
   margin-right: auto;
 }
 
-#header {
+#header, #footer {
+  font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
   padding: 8px;
   background-color: #444;
   color: white;
-  margin-top: -8px;
   border-radius: 8px;
 
-  h1 {
-    margin-top: 10px;
-  }
+  a, a:visited { color: white; }
+  a:hover { color: #bbb; }
+}
+
+#header {
+  margin-top: -8px;
+
+  h1 { margin-top: 10px; font-size: 28px; }
+}
+
+#footer {
+  margin-top: 12px;
 }
 
 #main {
