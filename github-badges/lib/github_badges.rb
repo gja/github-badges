@@ -30,7 +30,7 @@ def badge(name, description, &block)
   Badge.add(:name => name, :description => description, &block)
 end
 
-badge "Greenhorn", "Has at least one repo" do |user|
+badge "Padawan", "Has at least one repo" do |user|
   user.public_repo_count >= 1
 end
 
@@ -38,15 +38,19 @@ badge "Apprentice", "Has at least ten repos" do |user|
   user.public_repo_count >= 10
 end
 
-badge "Journeyman", "Has at least fifty repos" do |user|
+badge "Jedi", "Has at least fifty repos" do |user|
   user.public_repo_count >= 50
 end
 
-badge "Found a Buddy", "Has at least one follower" do |user|
+badge "Dark Lord", "Has at least a hundred repos" do |user|
+  user.public_repo_count >= 100
+end
+
+badge "Wingman", "Has at least one follower" do |user|
   user.followers_count >= 1
 end
 
-badge "Charismatic", "Has at least ten followers" do |user|
+badge "Gang Leader", "Has at least ten followers" do |user|
   user.followers_count >= 10
 end
 
@@ -58,7 +62,7 @@ badge "Minor Deity", "Has at least a thousand followers" do |user|
   user.followers_count >= 1000
 end
 
-badge "Curve Follower", "Has been a member for 6 months" do |user|
+badge "Fashionably Late", "Has been a member for 6 months" do |user|
   user.created_at < 6.months.ago
 end
 
@@ -74,6 +78,10 @@ badge "Founder", "Taught your grandmother to fork eggs" do |user|
   user.created_at.year < 2008
 end
 
+badge "Great Idea", "At least one of user's repositories has been forked" do |user|
+  user.repositories.any? {|repo| !repo.fork && repo.forks > 0}
+end
+
 get "/" do
   "The server is running."
 end
@@ -84,5 +92,5 @@ get '/users/:user' do
 end
 
 get '/application.css' do
-  Less.parse File.read("static/application.less")
+  Less.parse File.read("public/application.less")
 end

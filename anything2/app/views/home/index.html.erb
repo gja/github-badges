@@ -1,5 +1,24 @@
-<html>
-	<head></head>
-	<body>
-	</body>
-</html>
+<% content_for :head do %>
+		<%= javascript_include_tag :defaults %>
+		<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=dqpGH83V34G4.sHqgsHU3eS1v7EszH8vObPmOjbYln7rz1FV2.Y.V_mOAfhlkfaZ"></script>
+<% end %>
+<div id="map"></div>
+<script type="text/javascript">  
+     // Create a map object  
+     var map = new YMap(document.getElementById('map'));  
+   
+     // Add map type control  
+     map.addTypeControl();  
+   
+     // Add map zoom (long) control  
+     map.addZoomLong();  
+   
+     // Add the Pan Control  
+     map.addPanControl();  
+   
+     // Set map type to either of: YAHOO_MAP_SAT, YAHOO_MAP_HYB, YAHOO_MAP_REG  
+     map.setMapType(YAHOO_MAP_SAT);  
+   
+     // Display the map centered on a geocoded location  
+     map.drawZoomAndCenter("New York, NY", 4);  
+</script>  
