@@ -23,67 +23,96 @@ require 'models/badge'
 # badge "Reliable Forker", "Public repos contains only forks"
 # badge "Hard Forker", "Public repos at least 10 forks"
 
-
 set :haml, :format => :html5
 
-def badge(name, description, &block)
-  Badge.add(:name => name, :description => description, &block)
+def badge(name, &block)
+  Badge.add(:name => name).tap do |badge|
+    block.call badge
+  end
 end
 
-badge "Padawan", "Has at least one repo" do |user|
-  user.public_repo_count >= 1
+badge "Padawan" do |badge|
+  badge.description = "Has at least one repo"
+  badge.target = 1
+  badge.measure = :public_repo_count
 end
 
-badge "Apprentice", "Has at least ten repos" do |user|
-  user.public_repo_count >= 10
+badge "Apprentice" do |badge|
+  badge.description = "Has at least ten repos"
+  badge.target = 10
+  badge.measure = :public_repo_count
 end
 
-badge "Jedi", "Has at least fifty repos" do |user|
-  user.public_repo_count >= 50
+badge "Jedi" do |badge|
+  badge.description = "Has at least fifty repos"
+  badge.target = 50
+  badge.measure = :public_repo_count
 end
 
-badge "Dark Lord", "Has at least a hundred repos" do |user|
-  user.public_repo_count >= 100
+badge "Sith Master" do |badge|
+  badge.description = "Has at least a hundred repos"
+  badge.target = 100
+  badge.measure = :public_repo_count
 end
 
-badge "Wingman", "Has at least one follower" do |user|
-  user.followers_count >= 1
+badge "Wingman" do |badge|
+  badge.description = "Has at least one follower"
+  badge.target = 1
+  badge.measure = :followers_count
 end
 
-badge "Gang Leader", "Has at least ten followers" do |user|
-  user.followers_count >= 10
+badge "Gang Leader" do |badge|
+  badge.description = "Has at least ten followers"
+  badge.target = 10
+  badge.measure = :followers_count
 end
 
-badge "Cult Leader", "Has at least a hundred followers" do |user|
-  user.followers_count >= 100
+badge "Cult Leader" do |badge|
+  badge.description = "Has at least a hundred followers"
+  badge.target = 100
+  badge.measure = :followers_count
 end
 
-badge "Minor Deity", "Has at least a thousand followers" do |user|
-  user.followers_count >= 1000
+badge "Minor Deity" do |badge|
+  badge.description = "Has at least a thousand followers"
+  badge.target = 1000
+  badge.measure = :followers_count
 end
 
-badge "Fashionably Late", "Has been a member for 6 months" do |user|
-  user.created_at < 6.months.ago
+badge "Fashionably Late" do |badge|
+  badge.description = "Has been a member for 6 months"
+  badge.target = lambda { |user| user.created_at < 6.months.ago }
+  badge.measure = :created_at
 end
 
-badge "Chasm Crosser", "Has been a member for a year" do |user|
-  user.created_at < 1.year.ago
+badge "Chasm Crosser" do |badge|
+  badge.description = "Has been a member for a year"
+  badge.target = lambda { |user| user.created_at < 1.year.ago }
+  badge.measure = :created_at
 end
 
-badge "Edge Bleeder", "Has been a member for two years" do |user|
-  user.created_at < 2.years.ago
+badge "Edge Bleeder" do |badge|
+  badge.description = "Has been a member for two years"
+  badge.target = lambda { |user| user.created_at < 2.years.ago }
+  badge.measure = :created_at
 end
 
-badge "Founder", "Taught your grandmother to fork eggs" do |user|
-  user.created_at.year < 2008
+badge "Founder" do |badge|
+  badge.description = "Taught your grandmother to fork eggs"
+  badge.target = lambda { |user| user.created_at.year < 2008 }
+  badge.measure = :created_at
 end
 
-badge "Great Idea", "At least one of user's repositories has been forked" do |user|
-  user.repositories.any? {|repo| !repo.fork && repo.forks > 0}
+badge "Great Idea" do |badge|
+  badge.description = "At least one of user's repositories has been forked"
+  badge.measure = :forks
+  badge.target = lambda { |user| user.repositories.any? { |repo| !repo.fork && repo.forks > 0 } }
 end
 
-badge "Pardon Me, Please", "At least one of user's repositories has an open issue" do |user|
-  user.repositories.any? {|repo| repo.open_issues > 0}
+badge "Pardon Me, Please" do |badge|
+  badge.description = "At least one of user's repositories has an open issue"
+  badge.measure = :open_issues
+  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues > 0 } }
 end
 
 get "/" do
@@ -92,7 +121,7 @@ end
 
 get '/badges/:user' do
   user = Octopi::User.find(params[:user])
-  haml :user, :locals => { :user => user, :badges => Badge.filter(user) }
+  haml :user, :locals => { :user => user, :badges => Badge.all }
 end
 
 get '/application.css' do

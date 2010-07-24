@@ -58,6 +58,17 @@ ul {
 }
 
 #badges {
+  .badge.complete {
+    background-color: #666;
+    color: white;
+  }
+
+  .badge.incomplete {
+    background-color: #ccc;
+    color: #444;
+    opacity: 0.5;
+  }
+
   .badge {
     border-radius: 24px;
     float: left;
@@ -65,8 +76,7 @@ ul {
     height: 40px;
     margin: 8px;
     padding: 4px;
-    background: #666 url('/octocat.png') top left no-repeat;
-    color: white;
+    background: url('/octocat.png') top left no-repeat;
 
     .name {
       font-size: 18px;

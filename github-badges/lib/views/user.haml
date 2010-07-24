@@ -9,14 +9,19 @@
       #main
         .user
           %p.intro Here are the Github badges that we think <strong>#{user.name}</strong> deserves by virtue of his or her mad skizzles.
-          - if badges.empty?
-            %p.sadpanda The user you've requested does not have any badges.
-          - else
-            %ul#badges
-              - badges.each do |badge|
-                %li.badge
+          %ul#badges
+            - badges.each do |badge|
+              - if badge.earned_by?(user)
+                %li.badge.complete
                   %div.name= badge.name
                   %div.description= badge.description
+              - else
+                %li.badge.incomplete
+                  %div.name= badge.name
+                  - if badge.quantifiable?
+                    %div.description #{badge.description} (#{badge.progress(user)} / #{badge.target})
+                  - else
+                    %div.description #{badge.description} (incomplete)
         .clear
       #footer
         %p Built by <a href="http://twitter.com/bguthrie">Brian Guthrie</a>, <a href="http://twitter.com/tdinkar">Tejas Dinkar</a> and <a href="http://twitter.com/markhneedham">Mark Needham</a> for <a href="http://www.hackday.org/">Yahoo! Open Hack Day India 2010</a>. None of the people who built this site are affiliated with Github, just fans.

@@ -13,25 +13,6 @@ describe Badge do
     end
   end
 
-  context "applicable_to?" do
-    it "should always be true if given block is true" do
-      Badge.new { true }.should be_applicable_to(:anything)
-    end
-
-    it "should always be false if given block is false" do
-      Badge.new { false }.should_not be_applicable_to(:anything)
-    end
-
-    it "should evaluate the block against the given object" do
-      threepwood = Badge.new do |user|
-        user.name == "threepwood"
-      end
-
-      threepwood.should be_applicable_to(stub(:name => "threepwood"))
-      threepwood.should_not be_applicable_to(stub(:name => "lechuck"))
-    end
-  end
-
   context "badges" do
     before(:each) { Badge.clear_badges! }
 
@@ -47,15 +28,40 @@ describe Badge do
       Badge.clear_badges!
       Badge.all.should be_empty
     end
+  end
 
-    it "should be able to filter a list of badges applicable to a user" do
-      happy  = Badge.add { |u| u.happy? }
-      yellow = Badge.add { |u| u.color =~ /yellow/ }
-      green  = Badge.add { |u| u.color =~ /green/ }
+  context "quantifiable?" do
+    it "should be true if the target of the badge is a number" do
+      Badge.new(:target => 1).should be_quantifiable
+    end
 
-      Badge.filter(stub(:happy? => true, :color => "red")).should == [ happy ]
-      Badge.filter(stub(:happy? => false, :color => "yellow-green")).should == [ yellow, green ]
-      Badge.filter(stub(:happy? => false, :color => "blue")).should be_empty
+    it "should be false if the target of the badge is a Proc" do
+      Badge.new(:target => lambda { false }).should_not be_quantifiable
+    end
+
+    it "should be false if the target of the badge is a string" do
+      Badge.new(:target => "not valid").should_not be_quantifiable
+    end
+  end
+
+  context "earned_by?" do
+    it "should use the given target if it is a proc" do
+      Badge.new(:target => lambda { true }).should be_earned_by(stub("User"))
+      Badge.new(:target => lambda { false }).should_not be_earned_by(stub("User"))
+    end
+
+    it "should be true if the quantity in the given user is greater than or equal to the given target" do
+      Badge.new(:target => 1, :measure => :widgets).tap do |badge|
+        badge.should_not be_earned_by(stub(:widgets => 0))
+        badge.should be_earned_by(stub(:widgets => 1))
+        badge.should be_earned_by(stub(:widgets => 10))
+      end
+    end
+  end
+
+  context "progress" do
+    it "should apply the given measure to the user" do
+      Badge.new(:measure => :widgets).progress(stub(:widgets => 10)).should == 10
     end
   end
 end
