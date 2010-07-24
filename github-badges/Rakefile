@@ -1,0 +1,7 @@
+require 'spec/rake/spectask'
+
+Spec::Rake::SpecTask.new("spec") do |t|
+  t.pattern = "spec/*_spec.rb"
+end
+
+task :default => :spec
