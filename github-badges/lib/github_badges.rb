@@ -5,6 +5,7 @@ require 'less'
 require 'active_support/time'
 
 require 'models/badge'
+require 'models/user'
 
 # -- Number of repositories > 1, 10, 50
 # -- Number of forks 1, 10, 50
@@ -161,6 +162,18 @@ badge "Big in Japan" do |badge|
   badge.description = "You've attained a certain notoriety in the land of the Rising Sun."
   badge.measure = :login
   badge.target = [ "matz", "ko1" ]
+end
+
+badge "The Neil Ford Polyglot award" do |badge|
+  badge.description = "At least 5 programming languages across all non-forked repos"
+  badge.target = lambda {|user| get_languages_from_non_forked_repos(user).length >= 5 }
+  badge.measure = :languages
+end
+
+badge "The Butterfly effect" do |badge|
+  badge.description = "At least one unforked repository with a million lines of code"
+  badge.target = lambda {|user| user.repositories.any?{|repo| repo.languages.values.inject(0){|t,v| t + v} >= 1000000}}
+  badge.measure = :lines_of_code
 end
 
 get "/" do
