@@ -19,7 +19,7 @@
                  It is optional to specify the location of the Logger.   
                  Do so by sending a YCoordPoint to the initPos function.  
                */  
-              var mapmapCoordCenter = map.convertLatLonXY(map.getCenterLatLon());  
+              var mapCoordCenter = map.convertLatLonXY(map.getCenterLatLon());  
               YLog.initPos(mapCoordCenter); //call initPos to set the starting location  
               currentGeoPoint = new YGeoPoint( _c.Lat, _c.Lon);  
               placeMarker(currentGeoPoint);  
@@ -29,8 +29,8 @@
           function placeMarker(geoPoint){  
               // Printing to the Logger  
               YLog.print("Adding marker at....");  
-              YLog.print("Latitude:" + geoPoint.Lat + "  Longitude:" + geoPoint.Lon);  
-              var newnewMarker= new YMarker(geoPoint);  
+            YLog.print("Latitude:" + geoPoint.Lat + "  Longitude:" + geoPoint.Lon);  
+              var newMarker= new YMarker(geoPoint);  
               newMarker.addAutoExpand("Add a Label to a Marker for this Effect");  
               var markerMarkup = "<b>You can add markup this</b>";  
                   markerMarkup += "<i> easy</i>";  
