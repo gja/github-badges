@@ -1,0 +1,7 @@
+span.question a{
+		text-decoration: underline;
+}
+
+span.question input {
+		cursor: text;
+}

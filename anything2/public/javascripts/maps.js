@@ -20,32 +20,28 @@
                  Do so by sending a YCoordPoint to the initPos function.  
                */  
               var mapCoordCenter = map.convertLatLonXY(map.getCenterLatLon());  
-              YLog.initPos(mapCoordCenter); //call initPos to set the starting location  
               currentGeoPoint = new YGeoPoint( _c.Lat, _c.Lon);  
               placeMarker(currentGeoPoint);  
               displayPolyLines(currentGeoPoint);    
           }  
     
           function placeMarker(geoPoint){  
-              // Printing to the Logger  
-              YLog.print("Adding marker at....");  
-            YLog.print("Latitude:" + geoPoint.Lat + "  Longitude:" + geoPoint.Lon);  
-              var newMarker= new YMarker(geoPoint);  
-              newMarker.addAutoExpand("Add a Label to a Marker for this Effect");  
-              var markerMarkup = "<b>You can add markup this</b>";  
-                  markerMarkup += "<i> easy</i>";  
-              YEvent.Capture(newMarker, EventsList.MouseClick,   
-                  function(){  
-                      newMarker.openSmartWindow(markerMarkup);  
-                  });  
-              map.addOverlay(newMarker);  
+            var newMarker= new YMarker(geoPoint);  
+            // newMarker.addAutoExpand("Add a Label to a Marker for this Effect");  
+            newMarker.addLabel("Foo Woo boo");  
+						var markerMarkup = "<span class='question'><b>You can add markup this?</b> <input type='text' class='answer'><a class='submit'>submit</a></span>";  
+						newMarker.openSmartWindow(markerMarkup);
+						// YEvent.Capture(newMarker, EventsList.MouseClick, function(){ newMarker.openSmartWindow(markerMarkup); });
+            map.addOverlay(newMarker);
+						var context = "#" + newMarker.id;
+						$(context + " .answer").click(function(){console.log( $(context + " input").focus());})
+            $(context + " .submit").click(function(){console.log( $(context + " input").val());});
           }  
     
           function displayPolyLines(g_point){  
               polylinePoints.push(g_point);  
               if (canDisplayPolyLines){  
                   map.addOverlay(new YPolyline(polylinePoints, 'black',7,0.7));  
-                  YLog.print("Polyline added lines");  
               }  
           }  
     
