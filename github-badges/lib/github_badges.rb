@@ -5,6 +5,7 @@ require 'less'
 require 'active_support/time'
 
 require 'models/badge'
+require 'models/user'
 
 # -- Number of repositories > 1, 10, 50
 # -- Number of forks 1, 10, 50
