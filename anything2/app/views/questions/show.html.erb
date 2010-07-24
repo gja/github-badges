@@ -1,0 +1,23 @@
+<p>
+  <b>Text:</b>
+  <%=h @question.text %>
+</p>
+
+<p>
+  <b>Answer:</b>
+  <%=h @question.answer %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%=h @question.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%=h @question.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
