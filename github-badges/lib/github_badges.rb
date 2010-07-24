@@ -126,15 +126,15 @@ end
 badge "Great Idea" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least one of user's repositories has been forked"
-  badge.measure = :forks
-  badge.target = lambda { |user| user.repositories.any? { |repo| !repo.fork && repo.forks > 0 } }
+  badge.target = 1
+  badge.measure = lambda { |user| user.repositories.reject(&:fork).select{|repo| repo.forks > 0}.length}
 end
 
 badge "The Sands of Tines" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least ten of user's repositories have been forked"
-  badge.measure = :forks
-  badge.target = lambda { |user| user.repositories.any? { |repo| !repo.fork && repo.forks >= 10 } }
+  badge.target = 10
+  badge.measure = lambda { |user| user.repositories.reject(&:fork).select{|repo| repo.forks > 0}.length}
 end
 
 badge "Pardon Me, Please" do |badge|
@@ -189,15 +189,15 @@ end
 badge "Polygluttonous" do |badge|
   badge.category = "Code"
   badge.description = "At least 5 programming languages across all non-forked repos"
-  badge.target = lambda {|user| get_languages_from_non_forked_repos(user).length >= 5 }
-  badge.measure = :languages
+  badge.measure = lambda {|user| get_languages_from_non_forked_repos(user).length }
+  badge.target = 5
 end
 
 badge "The Butterfly Effect" do |badge|
   badge.category = "Code"
   badge.description = "At least one unforked repository with a million lines of code"
-  badge.target = lambda {|user| user.repositories.any? { |repo| repo.languages.values.inject(0) { |t,v| t + v } >= 1000000 }}
-  badge.measure = :lines_of_code
+  badge.measure = lambda {|user| user.repositories.map{|repo| repo.languages.values.inject(0){|t,v| t + v}}.max}
+  badge.target = 1000000
 end
 
 get "/" do
