@@ -1,0 +1,95 @@
+body {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: small;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.clear {
+  clear: both;
+}
+
+#content {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#header, #footer {
+  font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+  padding: 8px;
+  background-color: #444;
+  color: white;
+  border-radius: 8px;
+
+  a, a:visited { color: white; }
+  a:hover { color: #bbb; }
+}
+
+#header {
+  margin-top: -8px;
+
+  h1 { margin-top: 10px; font-size: 28px; }
+}
+
+#footer {
+  margin-top: 12px;
+}
+
+#main {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #C3D6F7;
+  border-radius: 8px;
+
+  .user {
+    .intro {
+      padding: 8px;
+      border-bottom: 1px dotted white;
+    }
+  }
+}
+
+#badges {
+  .badge.complete {
+    background-color: #666;
+    color: white;
+  }
+
+  .badge.incomplete {
+    background-color: #ccc;
+    color: #444;
+    opacity: 0.5;
+  }
+
+  .badge {
+    border-radius: 24px;
+    float: left;
+    width: 360px;
+    height: 40px;
+    margin: 8px;
+    padding: 4px;
+    background: url('/octocat.png') top left no-repeat;
+
+    .name {
+      font-size: 18px;
+      margin-left: 50px;
+    }
+
+    .description {
+      font-size: 10px;
+      margin-left: 50px;
+    }
+  }
+}
+
+#footer {
+  clear: both;
+}
