@@ -44,7 +44,7 @@ class Badge
   def quantification_criteria(user)
     case target
     when Array
-      "(#{progress(user)} not one of #{target.join(", ")})"
+      "(#{progress(user)} is not #{target.join(", or ")})"
     when Numeric
       "(#{progress(user)} / #{target})"
     else ""

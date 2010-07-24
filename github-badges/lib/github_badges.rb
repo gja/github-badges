@@ -186,7 +186,7 @@ badge "Big in Japan" do |badge|
   badge.target = [ "matz", "ko1" ]
 end
 
-badge "Tongue Twister" do |badge|
+badge "Polygluttonous" do |badge|
   badge.category = "Code"
   badge.description = "At least 5 programming languages across all non-forked repos"
   badge.target = lambda {|user| get_languages_from_non_forked_repos(user).length >= 5 }
