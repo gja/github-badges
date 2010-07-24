@@ -52,6 +52,7 @@ class Badge
   end
 
   def progress(user)
-    user.send(measure)
+    return user.send(measure) if measure.is_a? Symbol
+    measure.call(user)
   end
 end
