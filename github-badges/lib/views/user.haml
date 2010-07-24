@@ -5,10 +5,10 @@
   %body
     #content
       #header
-        %h1= user.name
+        %h1.user_name= user.name
       #main
         .user
-          %p.name Welcome to the badges page for #{user.name}
+          %p.intro Here are the Github badges that we think <strong>#{user.name}</strong> deserves by virtue of his or her mad skizzles.
           - if badges.empty?
             %p.sadpanda The user you've requested does not have any badges.
           - else
@@ -19,4 +19,4 @@
                   %div.description= badge.description
         .clear
       #footer
-        %p Yup.
+        %p Built by 
