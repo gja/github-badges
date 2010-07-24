@@ -140,15 +140,15 @@ end
 badge "Pardon Me, Please" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least one of user's repositories has an open issue"
-  badge.measure = :open_issues
-  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues >= 1 } }
+  badge.target = 1
+  badge.measure = lambda { |user| user.repositories.map{|repo| repo.open_issues}.max}
 end
 
 badge "It's Broken, Jerk" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least one of user's repositories has more than a hundred open issues"
-  badge.measure = :open_issues
-  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues > 100 } }
+  badge.target = 100
+  badge.measure = lambda { |user| user.repositories.map{|repo| repo.open_issues}.max}
 end
 
 badge "Center of Attention" do |badge|
