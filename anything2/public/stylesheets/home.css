@@ -1,8 +1,7 @@
-#map{  
-      height: 75%;  
-      width: 100%;  
+span.question a{
+		text-decoration: underline;
 }
 
-span.question a{
-		
+span.question input {
+		cursor: text;
 }
