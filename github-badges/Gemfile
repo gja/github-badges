@@ -1,6 +1,5 @@
 gem "sinatra", "1.0"
 gem "haml", "3.0.13"
-gem "octopi", "0.2.8"
 gem "activesupport", "3.0.0.beta4", :require => false
 gem "tzinfo", "0.3.22"
 gem "less", "1.2.21"
