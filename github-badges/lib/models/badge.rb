@@ -1,5 +1,5 @@
 class Badge
-  attr_accessor :name, :description, :target, :measure
+  attr_accessor :name, :description, :target, :measure, :category
 
   class << self
     def has_badge?(name)
@@ -22,7 +22,8 @@ class Badge
   end
 
   def initialize(attributes={})
-    @name, @description, @target, @measure = attributes.values_at(:name, :description, :target, :measure)
+    @name, @description, @target, @measure, @category =
+      attributes.values_at(:name, :description, :target, :measure, :category)
   end
 
   def quantifiable?

@@ -13,6 +13,12 @@ describe Badge do
     end
   end
 
+  context "category" do
+    it "should have a category" do
+      Badge.new(:category => "Stuff").category.should == "Stuff"
+    end
+  end
+
   context "badges" do
     before(:each) { Badge.clear_badges! }
 
