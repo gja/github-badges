@@ -19,4 +19,10 @@ describe "Github badges" do
     get "/users/cv"
     last_response.body.should have_tag("ul.badges li.badge", /1 repository badge/)
   end
+
+  it "should be able to fetch statistics of bguthrie" do
+    Octopi::User.stubs(:find).with("bguthrie").returns stub(:name => "Brian", :public_repo_count => 0)
+    get "/users/bguthrie"
+    last_response.body.should have_tag(".user .name", /Brian/)
+  end
 end

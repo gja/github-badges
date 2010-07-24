@@ -24,7 +24,7 @@ get "/" do
   "The server is running."
 end
 
-get '/users/cv' do
-  user = BadgeUser.find("cv")
+get '/users/:user' do
+  user = BadgeUser.find(params[:user])
   haml :user, :locals => { :user => user }
 end
