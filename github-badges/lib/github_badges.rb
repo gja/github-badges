@@ -2,7 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'sass'
 require 'octopi'
-require 'models/badge_user'
+require 'models/badge'
 
 # Number of repositories > 1, 10, 50
 # Number of forks 1, 10, 50
@@ -20,11 +20,23 @@ require 'models/badge_user'
 
 set :haml, :format => :html5
 
+def badge(name, &block)
+  Badge.add(name, &block)
+end
+
+badge "Has at least one repo" do |user|
+  user.public_repo_count >= 1
+end
+
+badge "Has at least ten repos" do |user|
+  user.public_repo_count >= 10
+end
+
 get "/" do
   "The server is running."
 end
 
 get '/users/:user' do
-  user = BadgeUser.find(params[:user])
-  haml :user, :locals => { :user => user }
+  user = Octopi::User.find(params[:user])
+  haml :user, :locals => { :user => user, :badges => Badge.filter(user) }
 end
