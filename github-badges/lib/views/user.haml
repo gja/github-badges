@@ -1,9 +1,22 @@
-#content
-  .user
-    %h2.name Welcome to the badges page for #{user.name}
-    - if badges.empty?
-      %p.sadpanda The user you've requested does not have any badges.
-    - else
-      %ul.badges
-        - badges.each do |badge|
-          %li.badge= badge.name
+%html
+  %head
+    %title Welcome to the badges page for #{user.name}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "/application.css"}
+  %body
+    #content
+      #header
+        %h1= user.name
+      #main
+        .user
+          %p.name Welcome to the badges page for #{user.name}
+          - if badges.empty?
+            %p.sadpanda The user you've requested does not have any badges.
+          - else
+            %ul#badges
+              - badges.each do |badge|
+                %li.badge
+                  %div.name= badge.name
+                  %div.description= badge.description
+        .clear
+      #footer
+        %p Yup.
