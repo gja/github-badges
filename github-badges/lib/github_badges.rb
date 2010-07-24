@@ -17,7 +17,13 @@ require 'octopi'
 # Github founder badge
 # Meta-git badge for user who is a maintainer of git
 
+set :haml, :format => :html5
+
+get "/" do
+  "The server is running."
+end
+
 get '/users/cv' do
   user = Octopi::User.find("cv")
-  user.name
+  haml :user, :locals => { :user => user }
 end
