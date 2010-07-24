@@ -1,13 +1,30 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "anything"
+set :server_name, "niranjangp.xen.prgmr.com"
+set :user, "rails"
+set :repository,  "git@#{server_name}:hackday"
+set :scm, :git
+set :scm_username, "git"
+set :runner, 'rails'
+set :use_sudo, false
+set :branch, "master"
+set :deploy_via, :checkout
+set :git_shallow_clone, 1
+set :deploy_to, "/var/www/rails/#{application}"
+set :chmod755, "app config db lib public vendor script script/* public/ disp*"
+role :app, server_name
+role :web, server_name
+role :db, server_name, :primary => true
+set :rails_env, 'production'
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+  task :restart, :roles => :app do
+    run "mkdir #{deploy_to}/current/anything/tmp"
+    run "touch #{deploy_to}/current/anything/tmp/restart.txt"
+  end
+end
 
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need
