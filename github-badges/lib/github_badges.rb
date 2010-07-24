@@ -164,13 +164,13 @@ badge "Big in Japan" do |badge|
   badge.target = [ "matz", "ko1" ]
 end
 
-badge "The Neil Ford Polyglot award" do |badge|
+badge "The Neal Ford Polyglot Award" do |badge|
   badge.description = "At least 5 programming languages across all non-forked repos"
   badge.target = lambda {|user| get_languages_from_non_forked_repos(user).length >= 5 }
   badge.measure = :languages
 end
 
-badge "The Butterfly effect" do |badge|
+badge "The Butterfly Effect" do |badge|
   badge.description = "At least one unforked repository with a million lines of code"
   badge.target = lambda {|user| user.repositories.any?{|repo| repo.languages.values.inject(0){|t,v| t + v} >= 1000000}}
   badge.measure = :lines_of_code
