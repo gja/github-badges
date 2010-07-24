@@ -1,11 +1,10 @@
 require 'sinatra'
 require 'haml'
-require 'sass'
 require 'octopi'
 require 'less'
+require 'active_support/time'
 
 require 'models/badge'
-require 'active_support/time'
 
 # -- Number of repositories > 1, 10, 50
 # -- Number of forks 1, 10, 50
@@ -23,6 +22,7 @@ require 'active_support/time'
 # badge "Cowboy", "At least one repo without any tests or specs"
 # badge "Reliable Forker", "Public repos contains only forks"
 # badge "Hard Forker", "Public repos at least 10 forks"
+
 
 set :haml, :format => :html5
 
@@ -82,11 +82,15 @@ badge "Great Idea", "At least one of user's repositories has been forked" do |us
   user.repositories.any? {|repo| !repo.fork && repo.forks > 0}
 end
 
+badge "Pardon Me, Please", "At least one of user's repositories has an open issue" do |user|
+  user.repositories.any? {|repo| repo.open_issues > 0}
+end
+
 get "/" do
   "The server is running."
 end
 
-get '/users/:user' do
+get '/badges/:user' do
   user = Octopi::User.find(params[:user])
   haml :user, :locals => { :user => user, :badges => Badge.filter(user) }
 end
