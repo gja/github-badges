@@ -206,7 +206,7 @@ end
 
 get '/badges/:user' do
   user = Octopi::User.find(params[:user])
-  haml :user, :locals => { :user => user, :badges => Badge.all }
+  haml :user, :locals => { :user => user, :badge_categories => Badge.all.group_by(&:category) }
 end
 
 get '/application.css' do
