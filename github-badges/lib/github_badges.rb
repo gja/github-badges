@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'haml'
-require 'octopi'
+require 'vendor/octopi/lib/octopi'
 require 'less'
 require 'active_support/time'
 
