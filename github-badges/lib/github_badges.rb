@@ -31,25 +31,31 @@ def badge(name, &block)
   end
 end
 
-badge "Padawan" do |badge|
+badge "It's A Start" do |badge|
+  badge.description = "Has exactly one repo"
+  badge.target = [ 1 ]
+  badge.measure = :public_repo_count
+end
+
+badge "Toe-Dangler" do |badge|
   badge.description = "Has at least one repo"
   badge.target = 1
   badge.measure = :public_repo_count
 end
 
-badge "Apprentice" do |badge|
+badge "Code Middle Manager" do |badge|
   badge.description = "Has at least ten repos"
   badge.target = 10
   badge.measure = :public_repo_count
 end
 
-badge "Jedi" do |badge|
+badge "Git Wrangler" do |badge|
   badge.description = "Has at least fifty repos"
   badge.target = 50
   badge.measure = :public_repo_count
 end
 
-badge "Sith Master" do |badge|
+badge "A Rainbow of Gittles" do |badge|
   badge.description = "Has at least a hundred repos"
   badge.target = 100
   badge.measure = :public_repo_count
@@ -61,7 +67,7 @@ badge "Wingman" do |badge|
   badge.measure = :followers_count
 end
 
-badge "Gang Leader" do |badge|
+badge "Rogue Leader" do |badge|
   badge.description = "Has at least ten followers"
   badge.target = 10
   badge.measure = :followers_count
@@ -79,13 +85,13 @@ badge "Minor Deity" do |badge|
   badge.measure = :followers_count
 end
 
-badge "Fashionably Late" do |badge|
+badge "Late to the Party" do |badge|
   badge.description = "Has been a member for 6 months"
   badge.target = lambda { |user| user.created_at < 6.months.ago }
   badge.measure = :created_at
 end
 
-badge "Chasm Crosser" do |badge|
+badge "Early Chasm Crosser" do |badge|
   badge.description = "Has been a member for a year"
   badge.target = lambda { |user| user.created_at < 1.year.ago }
   badge.measure = :created_at
@@ -97,8 +103,8 @@ badge "Edge Bleeder" do |badge|
   badge.measure = :created_at
 end
 
-badge "Founder" do |badge|
-  badge.description = "Taught your grandmother to fork eggs"
+badge "Taught Grandma To Fork Eggs" do |badge|
+  badge.description = "User is a founder of Github"
   badge.target = lambda { |user| user.created_at.year < 2008 }
   badge.measure = :created_at
 end
@@ -109,10 +115,52 @@ badge "Great Idea" do |badge|
   badge.target = lambda { |user| user.repositories.any? { |repo| !repo.fork && repo.forks > 0 } }
 end
 
+badge "The Sands of Tines" do |badge|
+  badge.description = "At least ten of user's repositories have been forked"
+  badge.measure = :forks
+  badge.target = lambda { |user| user.repositories.any? { |repo| !repo.fork && repo.forks >= 10 } }
+end
+
 badge "Pardon Me, Please" do |badge|
   badge.description = "At least one of user's repositories has an open issue"
   badge.measure = :open_issues
-  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues > 0 } }
+  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues >= 1 } }
+end
+
+badge "It's Broken, Jerk" do |badge|
+  badge.description = "At least one of user's repositories has more than a hundred open issues"
+  badge.measure = :open_issues
+  badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues > 100 } }
+end
+
+badge "Center of Attention" do |badge|
+  badge.description = "More people follow this user than they follow back"
+  badge.measure = :followers_count
+  badge.target = lambda { |user| user.followers_count > user.following_count }
+end
+
+badge "You Get The Gist" do |badge|
+  badge.description = "User has created at least one gist"
+  badge.measure = :public_gist_count
+  badge.target = 1
+end
+
+badge "A List of Gists" do |badge|
+  badge.description = "User has created at least ten gists"
+  badge.measure = :public_gist_count
+  badge.target = 10
+end
+
+badge "A Basketful of Gistses" do |badge|
+  badge.description = "User has created at least a hundred gists"
+  badge.measure = :public_gist_count
+  badge.target = 100
+end
+
+badge "Big in Japan" do |badge|
+  badge.description = "You've attained a certain notoriety in the land of the Rising Sun."
+  badge.measure = :login
+  badge.target = [ "matz", "ko1" ]
 end
 
 get "/" do

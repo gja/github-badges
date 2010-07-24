@@ -35,6 +35,10 @@ describe Badge do
       Badge.new(:target => 1).should be_quantifiable
     end
 
+    it "should be true if the target of a badge is an array" do
+      Badge.new(:target => [1, 2]).should be_quantifiable
+    end
+
     it "should be false if the target of the badge is a Proc" do
       Badge.new(:target => lambda { false }).should_not be_quantifiable
     end
@@ -55,6 +59,15 @@ describe Badge do
         badge.should_not be_earned_by(stub(:widgets => 0))
         badge.should be_earned_by(stub(:widgets => 1))
         badge.should be_earned_by(stub(:widgets => 10))
+      end
+    end
+
+    it "should be true if the quantity in the given user is included in the list of possible targets" do
+      Badge.new(:target => [1, 2], :measure => :widgets).tap do |badge|
+        badge.should_not be_earned_by(stub(:widgets => 0))
+        badge.should be_earned_by(stub(:widgets => 1))
+        badge.should be_earned_by(stub(:widgets => 2))
+        badge.should_not be_earned_by(stub(:widgets => 3))
       end
     end
   end
