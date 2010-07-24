@@ -116,6 +116,18 @@ badge "Pardon Me, Please" do |badge|
   badge.target = lambda { |user| user.repositories.any? { |repo| repo.open_issues > 0 } }
 end
 
+badge "The Neil Ford Polyglot award" do |badge|
+  badge.description = "At least 5 programming languages across all non-forked repos"
+  badge.target = lambda {|user| get_languages_from_non_forked_repos(user).length >= 5 }
+  badge.measure = :languages
+end
+
+badge "The Butterfly effect" do |badge|
+  badge.description = "At least one unforked repository with a million lines of code"
+  badge.target = lambda {|user| user.repositories.any?{|repo| repo.languages.values.inject(0){|t,v| t + v} >= 1000000}}
+  badge.measure = :lines_of_code
+end
+
 get "/" do
   "The server is running."
 end
