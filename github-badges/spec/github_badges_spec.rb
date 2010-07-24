@@ -18,20 +18,29 @@ describe "Github badges" do
   it "should not render any badges if the user matches no badges" do
     Octopi::User.stubs(:find).with("cv").returns stub(:name => "cv", :public_repo_count => 0)
     get "/users/cv"
-    last_response.body.should_not have_tag("ul.badges")
+    last_response.body.should_not have_tag("ul#badges")
     last_response.body.should have_tag(".sadpanda", "The user you've requested does not have any badges.")
   end
 
-  it "should render a 1 repository badge if user has at least 1 repository" do
-    Badge.add("Has a repo") { |user| user.public_repo_count == 1 }
+  it "should render a badge if user matches the criteria for that badge repository" do
+    Badge.add(:name => "Has a repo") { |user| user.public_repo_count == 1 }
 
     Octopi::User.stubs(:find).with("cv").returns stub(:name => "cv", :public_repo_count => 1)
     get "/users/cv"
-    last_response.body.should have_tag("ul.badges li.badge", /Has a repo/)
+    last_response.body.should have_tag("ul#badges li.badge", /Has a repo/)
 
     Octopi::User.stubs(:find).with("bguthrie").returns stub(:name => "bguthrie", :public_repo_count => 0)
     get "/users/bguthrie"
-    last_response.body.should_not have_tag("ul.badges li.badge", /Has a repo/)
+    last_response.body.should_not have_tag("ul#badges li.badge", /Has a repo/)
+  end
+
+  it "should render both the name and the description of a badge" do
+    Badge.add(:name => "Truth-haver", :description => "Word") { true }
+
+    Octopi::User.stubs(:find).with("foo").returns stub(:name => "foo")
+    get "/users/foo"
+    last_response.body.should have_tag("ul#badges li.badge .name", "Truth-haver")
+    last_response.body.should have_tag("ul#badges li.badge .description", "Word")
   end
 
 end
