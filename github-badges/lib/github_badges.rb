@@ -2,6 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'sass'
 require 'octopi'
+require 'models/badge_user'
 
 # Number of repositories > 1, 10, 50
 # Number of forks 1, 10, 50
@@ -24,6 +25,6 @@ get "/" do
 end
 
 get '/users/cv' do
-  user = Octopi::User.find("cv")
+  user = BadgeUser.find("cv")
   haml :user, :locals => { :user => user }
 end
