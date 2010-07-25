@@ -97,7 +97,7 @@ end
 
 badge "Late to the Party" do |badge|
   badge.category = "Membership"
-  badge.description = "Has been a member for 6 months"
+  badge.description = "Has been a member for (only) 6 months"
   badge.target = lambda { |user| user.created_at < 6.months.ago }
   badge.measure = :created_at
 end
@@ -201,12 +201,18 @@ badge "The Butterfly Effect" do |badge|
 end
 
 get "/" do
-  "The server is running."
+  haml :search, :locals => { :title => "Search" }
+end
+
+get '/badges' do
+  if params[:username]
+    redirect "/badges/#{params[:username]}"
+  end
 end
 
 get '/badges/:user' do
   user = Octopi::User.find(params[:user])
-  haml :user, :locals => { :user => user, :badge_categories => Badge.all.group_by(&:category) }
+  haml :user, :locals => { :title => user.name, :user => user, :badge_categories => Badge.all.group_by(&:category) }
 end
 
 get '/application.css' do

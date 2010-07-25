@@ -20,7 +20,7 @@ describe "Github badges" do
 
     Octopi::User.stubs(:find).with("cv").returns stub(:name => "cv", :public_repo_count => 1)
     get "/badges/cv"
-    last_response.body.should have_tag("ul#badges li.badge.complete")
+    last_response.body.should have_tag("ul.badges li.badge.complete")
   end
 
   it "should render an incomplete badge if the target of the badge has not been achieved" do
@@ -28,7 +28,7 @@ describe "Github badges" do
     Octopi::User.stubs(:find).with("bguthrie").returns stub(:name => "bguthrie", :public_repo_count => 0)
 
     get "/badges/bguthrie"
-    last_response.body.should have_tag("ul#badges li.badge.incomplete")
+    last_response.body.should have_tag("ul.badges li.badge.incomplete")
   end
 
   it "should render both the name and the description of a badge" do
@@ -36,10 +36,16 @@ describe "Github badges" do
     Octopi::User.stubs(:find).with("foo").returns stub(:name => "foo")
 
     get "/badges/foo"
-    last_response.body.should have_tag("ul#badges li.badge") do
+    last_response.body.should have_tag("ul.badges li.badge") do
       have_tag(".name", "Truth-haver")
       have_tag(".description", "Word")
     end
+  end
+
+  it "should redirect to the appropriate page if queried for a username" do
+    get "/badges?username=cv"
+    last_response.should be_redirect
+    last_response.location.should == "/badges/cv"
   end
 
 end
