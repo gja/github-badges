@@ -1,13 +1,11 @@
 def get_languages_from_non_forked_repos(user)
-  public_repos = user.repositories.select{|r| r.fork == false}
-  merge_language_maps(public_repos.collect{|r| r.languages})
+  merge_language_maps user.repositories.reject(&:fork).collect(&:languages)
 end
 
 def merge_language_maps(maps)
-  maps.inject({}) do |total, map|
-    map.each do |k, v|
-      old_value = total[k] || 0
-      total[k] = v + old_value
+  maps.inject(Hash.new(0)) do |total, map|
+    map.each do |language, line_count|
+      total[language] += line_count
     end
     total
   end

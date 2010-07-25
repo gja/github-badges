@@ -13,6 +13,12 @@ describe Badge do
     end
   end
 
+  context "category" do
+    it "should have a category" do
+      Badge.new(:category => "Stuff").category.should == "Stuff"
+    end
+  end
+
   context "badges" do
     before(:each) { Badge.clear_badges! }
 
@@ -75,6 +81,10 @@ describe Badge do
   context "progress" do
     it "should apply the given measure to the user" do
       Badge.new(:measure => :widgets).progress(stub(:widgets => 10)).should == 10
+    end
+
+    it "should should be able to apply a dynamic measure" do
+      Badge.new(:measure => lambda{|user| user.widgets}).progress(stub(:widgets => 10)).should == 10
     end
   end
 end
