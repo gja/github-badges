@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var ENV = "http://blazing-water-96.heroku.com/yql/github.env?v=1";
+  var ENV = "http://github-badges.heroku.com/yql/github.env?v=1";
 
   $("#username").autocomplete({
     source: function(request, response) {
