@@ -47,7 +47,7 @@
 				
 				
 				var markers = $.map(questions, function(question, i){
-					return createMarker(map, question.question, question.question);
+					return createMarker(question.question);
 				}); 
 
 				$.each(markers, function(i, marker){
