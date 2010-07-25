@@ -3,6 +3,10 @@ body {
   font-size: small;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+}
+
 * {
   margin: 0px;
   padding: 0px;
@@ -23,7 +27,6 @@ ul {
 }
 
 #header, #footer {
-  font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
   padding: 8px;
   background-color: #444;
   color: white;
@@ -57,26 +60,41 @@ ul {
   }
 }
 
-#badges {
+.categories {
+  .category {
+    padding-top: 24px;
+    clear: both;
+
+    h2.name {
+      padding-left: 20px;
+      text-transform: uppercase;
+      font-size: 16px;
+    }
+  }
+}
+
+.badges {
   .badge.complete {
     background-color: #666;
     color: white;
+    border: 4px solid white;
   }
 
   .badge.incomplete {
     background-color: #ccc;
     color: #444;
     opacity: 0.5;
+    border: 4px solid #C3D6F7;
   }
 
   .badge {
     border-radius: 24px;
     float: left;
     width: 360px;
-    height: 40px;
+    height: 50px;
     margin: 8px;
     padding: 4px;
-    background: url('/octocat.png') top left no-repeat;
+    background: url('/octocat.png') 4 left no-repeat;
 
     .name {
       font-size: 18px;

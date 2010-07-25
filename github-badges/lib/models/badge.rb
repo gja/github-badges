@@ -1,5 +1,5 @@
 class Badge
-  attr_accessor :name, :description, :target, :measure
+  attr_accessor :name, :description, :target, :measure, :category
 
   class << self
     def has_badge?(name)
@@ -22,7 +22,8 @@ class Badge
   end
 
   def initialize(attributes={})
-    @name, @description, @target, @measure = attributes.values_at(:name, :description, :target, :measure)
+    @name, @description, @target, @measure, @category =
+      attributes.values_at(:name, :description, :target, :measure, :category)
   end
 
   def quantifiable?
@@ -43,7 +44,7 @@ class Badge
   def quantification_criteria(user)
     case target
     when Array
-      "(#{progress(user)} not one of #{target.join(", ")})"
+      "(#{progress(user)} is not #{target.join(", or ")})"
     when Numeric
       "(#{progress(user)} / #{target})"
     else ""
@@ -51,6 +52,7 @@ class Badge
   end
 
   def progress(user)
-    user.send(measure)
+    return user.send(measure) if measure.is_a? Symbol
+    measure.call(user)
   end
 end
