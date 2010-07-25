@@ -141,14 +141,14 @@ badge "Pardon Me, Please" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least one of user's repositories has an open issue"
   badge.target = 1
-  badge.measure = lambda { |user| user.repositories.map{|repo| repo.open_issues}.max}
+  badge.measure = lambda { |user| user.repositories.map(&:open_issues).max || 0}
 end
 
 badge "It's Broken, Jerk" do |badge|
   badge.category = "Collaboration"
   badge.description = "At least one of user's repositories has more than a hundred open issues"
   badge.target = 100
-  badge.measure = lambda { |user| user.repositories.map{|repo| repo.open_issues}.max}
+  badge.measure = lambda { |user| user.repositories.map(&:open_issues).max || 0}
 end
 
 badge "Center of Attention" do |badge|
@@ -196,7 +196,7 @@ end
 badge "The Butterfly Effect" do |badge|
   badge.category = "Code"
   badge.description = "At least one unforked repository with a million lines of code"
-  badge.measure = lambda {|user| user.repositories.map{|repo| repo.languages.values.inject(0){|t,v| t + v}}.max}
+  badge.measure = lambda {|user| user.repositories.map{|repo| repo.languages.values.inject(0){|t,v| t + v}}.max || 0}
   badge.target = 1000000
 end
 
