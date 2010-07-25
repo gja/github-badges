@@ -5,6 +5,7 @@ gem "haml", "3.0.13"
 gem "activesupport", "3.0.0.beta4", :require => false
 gem "tzinfo", "0.3.22"
 gem "less", "1.2.21"
+gem "httparty", "0.6.1"
 
 group :test do
   gem "rspec", "1.3.0", :require => "spec"
