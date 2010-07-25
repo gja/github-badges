@@ -95,21 +95,28 @@ badge "Minor Deity" do |badge|
   badge.measure = :followers_count
 end
 
-badge "Late to the Party" do |badge|
+badge "Noob Chutney" do |badge|
   badge.category = "Membership"
-  badge.description = "Has been a member for (only) 6 months"
-  badge.target = lambda { |user| user.created_at < 6.months.ago }
+  badge.description = "Has been a member for less than 6 months"
+  badge.target = lambda { |user| user.created_at > 6.months.ago }
   badge.measure = :created_at
 end
 
-badge "Early Chasm Crosser" do |badge|
+badge "Please To Pull My Fork" do |badge|
+  badge.category = "Membership"
+  badge.description = "Has been a member for at least six months"
+  badge.target = lambda { |user| user.created_at <= 6.months.ago }
+  badge.measure = :created_at
+end
+
+badge "Apt Gitter" do |badge|
   badge.category = "Membership"
   badge.description = "Has been a member for a year"
   badge.target = lambda { |user| user.created_at < 1.year.ago }
   badge.measure = :created_at
 end
 
-badge "Edge Bleeder" do |badge|
+badge "All Your Rebase" do |badge|
   badge.category = "Membership"
   badge.description = "Has been a member for two years"
   badge.target = lambda { |user| user.created_at < 2.years.ago }
