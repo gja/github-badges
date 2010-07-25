@@ -3,10 +3,10 @@
   <meta>
     <author>Brian Guthrie</author>
     <documentationURL></documentationURL>
-    <sampleQuery>select * from {table} where login='bgu'</sampleQuery>
+    <sampleQuery>select * from {table} where login='guthrie'</sampleQuery>
   </meta>
   <bindings>
-    <select itemPath="users" produces="XML">
+    <select itemPath="" produces="XML">
       <urls>
         <url>http://github.com/api/v2/xml/user/search/{login}</url>
       </urls>
