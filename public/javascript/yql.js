@@ -105,7 +105,8 @@ YUI.add('yql', function(Y) {
             };
 
             url = BASE_URL + qs;
-            console.log("Getting " + url + " with opts " + opts);
+            console.log("Getting " + url);
+            console.log(opts);
             Y.Get.script(url, opts);
             return this;
         }

@@ -6,7 +6,7 @@
     <sampleQuery>select * from {table} where login='bgu'</sampleQuery>
   </meta>
   <bindings>
-    <select itemPath="commits" produces="XML">
+    <select itemPath="users" produces="XML">
       <urls>
         <url>http://github.com/api/v2/xml/user/search/{login}</url>
       </urls>

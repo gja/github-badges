@@ -6,7 +6,7 @@
     %script{:type => "text/javascript", :src => "/javascript/yql.js"}
     :javascript
       YUI().use('yql', function(Y) {
-        new Y.yql('select * from github.user.search where (login = "bgu")', function(r) {
+        new Y.yql('select * from github.user.search where (login = "guthrie")', function(r) {
           console.log(r);
           // r.query; //The result
           // r.error; //The error message
