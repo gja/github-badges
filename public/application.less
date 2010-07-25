@@ -17,6 +17,7 @@ ul {
 }
 
 form {
+
   fieldset {
     border: none;
     margin: 4px;
@@ -28,12 +29,28 @@ form {
     display: none;
   }
 
-  input[type=text] {
+  #username_container {
+    position: relative;
     -webkit-box-shadow: 0 1px 3px #555;
     border: 2px solid #ddd;
-    width: 600px;
-    font-size: 26px;
-    padding: 4px;
+    display: inline-block;
+
+    #spinner {
+      background: transparent url("/images/spinner.gif") top left no-repeat;
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      right: 10px;
+      top: 11px;
+      display: none;
+    }
+
+    input[type=text] {
+      border: none;
+      width: 580px;
+      font-size: 26px;
+      padding: 4px;
+    }
   }
 
   button, input[type=submit] {

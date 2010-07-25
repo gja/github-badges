@@ -3,5 +3,7 @@
   %form.search{:method => :get, :action => "/badges"}
     %fieldset
       %label{:for => "username"} username
-      %input{:type => "text", :name => "username", :id => "username"}
+      %div#username_container
+        %input{:type => "text", :name => "username", :id => "username"}
+        %div#spinner
       %input{:type => "Submit", :value => "Search"}

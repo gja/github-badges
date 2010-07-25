@@ -2,16 +2,10 @@
   %head
     %title Github Badges - #{title}
     %link{:rel => "stylesheet", :type => "text/css", :href => "/application.css"}
-    %script{:type => "text/javascript", :src => "http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"}
-    %script{:type => "text/javascript", :src => "/javascript/yql.js"}
-    :javascript
-      YUI().use('yql', function(Y) {
-        new Y.yql('select * from github.user.search where (login = "guthrie")', function(r) {
-          console.log(r);
-          // r.query; //The result
-          // r.error; //The error message
-        }, { env: "http://blazing-water-96.heroku.com/yql/github.env?v=1" });
-      });
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?v=1"}
+    %script{:type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js?v=1"}
+    %script{:type => "text/javascript", :src => "/javascript/jquery.query-yql.min.js"}
+    %script{:type => "text/javascript", :src => "/javascript/username-autocomplete.js"}
 
   %body
     #content
