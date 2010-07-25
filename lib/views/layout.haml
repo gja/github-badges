@@ -2,6 +2,18 @@
   %head
     %title Github Badges - #{title}
     %link{:rel => "stylesheet", :type => "text/css", :href => "/application.css"}
+    %script{:type => "text/javascript", :src => "http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"}
+    %script{:type => "text/javascript", :src => "/yql.js"}
+    :javascript
+      YUI().use('yql', function(Y) {
+        new Y.yql('select * from github.user.search where (login = "bgu")', function(r) {
+          //Do something here.
+          console.log(r);
+          // r.query; //The result
+          // r.error; //The error message
+        }, { env: "http://blazing-water-96.heroku.com/github.env" });
+      });
+
   %body
     #content
       #header
