@@ -1,5 +1,5 @@
 body {
-  font-family: Verdana, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: small;
 }
 
@@ -16,55 +16,56 @@ ul {
   list-style-type: none;
 }
 
-form {
+.search {
+  .search_form {
+    fieldset {
+      border: none;
+      margin: 4px;
+      padding: 20px 0px 20px 40px;
+    }
 
-  fieldset {
-    border: none;
-    margin: 4px;
-    padding: 20px 0px 20px 40px;
-  }
-
-  label {
-    font-size: 28px;
-    display: none;
-  }
-
-  #username_container {
-    position: relative;
-    -webkit-box-shadow: 0 1px 3px #555;
-    border: 2px solid #ddd;
-    display: inline-block;
-
-    #spinner {
-      background: transparent url("/images/spinner.gif") top left no-repeat;
-      position: absolute;
-      height: 16px;
-      width: 16px;
-      right: 10px;
-      top: 11px;
+    label {
+      font-size: 28px;
       display: none;
     }
 
-    input[type=text] {
-      border: none;
-      width: 580px;
-      font-size: 26px;
-      padding: 4px;
+    #username_container {
+      position: relative;
+      -webkit-box-shadow: 0 1px 3px #555;
+      border: 2px solid #ddd;
+      display: inline-block;
+
+      #spinner {
+        background: transparent url("/images/spinner.gif") top left no-repeat;
+        position: absolute;
+        height: 16px;
+        width: 16px;
+        right: 10px;
+        top: 11px;
+        display: none;
+      }
+
+      input[type=text] {
+        border: none;
+        width: 580px;
+        font-size: 26px;
+        padding: 4px;
+      }
     }
-  }
 
-  button, input[type=submit] {
-    background-color: #777;
-    -webkit-box-shadow: 0 1px 3px #555;
-    color: #fff;
-    font-size: 20px;
-    padding: 8px;
-    border: 2px solid #ddd;
-    display: inline-block;
-    padding: 10px 14px 6px 14px;
-    cursor: pointer;
+    button, input[type=submit] {
+      background-color: #777;
+      -webkit-box-shadow: 0 1px 3px #555;
+      color: #fff;
+      font-size: 20px;
+      padding: 8px;
+      border: 2px solid #ddd;
+      display: inline-block;
+      padding: 10px 14px 6px 14px;
+      cursor: pointer;
 
-    :hover { background-color: #666; }
+      :hover { background-color: #666; }
+    }
   }
 }
 
@@ -107,20 +108,25 @@ form {
   .user {
     .intro {
       padding: 8px;
-      border-bottom: 1px dotted white;
     }
   }
 }
 
 .categories {
   .category {
-    padding-top: 24px;
+    // background-color: #6D8ABD;
+    background-color: #9EB4DB;
+    border-radius: 8px;
+    padding-top: 8px;
+    margin: 8px 0px 8px 0px;
     clear: both;
 
     h2.name {
-      padding-left: 20px;
+      color: black;
+      font-family: Helvetica, Arial, sans-serif;
+      padding-left: 8px;
       text-transform: uppercase;
-      font-size: 16px;
+      font-size: 12px;
     }
   }
 }
@@ -130,6 +136,7 @@ form {
     background-color: #666;
     color: white;
     border: 4px solid white;
+    -webkit-box-shadow: 0 1px 3px #555;
   }
 
   .badge.incomplete {

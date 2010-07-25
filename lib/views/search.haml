@@ -1,9 +1,8 @@
 .search
-  %p Search for a Github username to see their badges.
-  %form.search{:method => :get, :action => "/badges"}
+  %form.search_form{:method => :get, :action => "/badges"}
     %fieldset
       %label{:for => "username"} username
       %div#username_container
-        %input{:type => "text", :name => "username", :id => "username"}
+        %input{:type => "text", :name => "username", :id => "username", :placeholder => "Github username"}
         %div#spinner
       %input{:type => "Submit", :value => "Search"}
