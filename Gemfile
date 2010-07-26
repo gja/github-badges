@@ -14,8 +14,6 @@ group :test do
   gem "rspec", "1.3.0", :require => "spec"
   gem "mocha", "0.9.8"
   gem "rack-test", "0.5.4", :require => "rack/test"
-  gem "cucumber", "0.8.5"
-  gem "webrat", "0.7.1"
   gem "rspec_tag_matchers", "1.0.0"
 end
 
