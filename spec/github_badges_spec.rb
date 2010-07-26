@@ -42,6 +42,14 @@ describe "Github badges" do
     end
   end
 
+  it "should display an error message indicating that this is an invalid GitHub user if there is not GitHub account for the provided username" do
+    Octopi::User.stubs(:find).with('someUnknownUser').raises(Octopi::NotFound, "The User you were looking for could not be found, or is private.")
+
+    get "/badges/someUnknownUser"
+
+    last_response.body.should have_tag(".nouser .intro")
+  end
+
   it "should redirect to the appropriate page if queried for a username" do
     get "/badges?username=cv"
     last_response.should be_redirect

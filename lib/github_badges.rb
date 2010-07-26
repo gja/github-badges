@@ -218,8 +218,12 @@ get '/badges' do
 end
 
 get '/badges/:user' do
-  user = Octopi::User.find(params[:user])
-  haml :user, :locals => { :title => user.name, :user => user, :badge_categories => Badge.all.group_by(&:category) }
+  begin
+    user = Octopi::User.find(params[:user])
+    haml :user, :locals => { :title => user.name, :user => user, :badge_categories => Badge.all.group_by(&:category) }
+  rescue Octopi::NotFound
+    haml :user_not_found, :locals => { :title => params[:user] }
+  end
 end
 
 get '/application.css' do
