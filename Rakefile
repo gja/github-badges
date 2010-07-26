@@ -9,7 +9,8 @@ task :repl do
 end
 
 task :server do
-  system "shotgun -Ilib -Edevelopment -p4567 lib/github_badges.rb"
+  system "rackup -E development -p 4567 config.ru"
 end
 
 task :default => :spec
+

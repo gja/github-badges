@@ -19,6 +19,3 @@ group :test do
   gem "rspec_tag_matchers", "1.0.0"
 end
 
-group :development do
-  gem "shotgun", "0.8.0"
-end
