@@ -52,8 +52,6 @@ class Badge
   end
 
   def progress(user)
-    result = measure.is_a?(Symbol) ? user.send(measure) : measure.call(user)
-    raise self.name if result.nil?
-    result
+    measure.is_a?(Symbol) ? user.send(measure) : measure.call(user)
   end
 end
