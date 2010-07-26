@@ -207,6 +207,12 @@ badge "The Butterfly Effect" do |badge|
   badge.target = 1000000
 end
 
+helpers do
+  def badge_link(username)
+    "<a href=\"/badges/#{username}\">#{username}</a>"
+  end
+end
+
 get "/" do
   haml :search, :locals => { :title => "Search" }
 end
@@ -229,3 +235,4 @@ end
 get '/application.css' do
   Less.parse File.read("public/application.less")
 end
+
