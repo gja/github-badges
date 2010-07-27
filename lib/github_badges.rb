@@ -5,12 +5,12 @@ require 'less'
 require 'active_support/time'
 
 require 'models/badge'
-# require 'models/badge/code'
-# require 'models/badge/collaboration'
-# require 'models/badge/followers'
-# require 'models/badge/membership'
-# require 'models/badge/misc'
-# require 'models/badge/repositories'
+require 'models/badge/code'
+require 'models/badge/collaboration'
+require 'models/badge/followers'
+require 'models/badge/membership'
+require 'models/badge/misc'
+require 'models/badge/repositories'
 
 require 'models/user'
 
