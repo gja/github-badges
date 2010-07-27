@@ -8,8 +8,13 @@ class Badge
 
     badge "The Butterfly Effect" do |badge|
       badge.description = "At least one unforked repository with a million lines of code"
-      badge.measure = lambda {|user| user.repositories.map{|repo| repo.languages.values.inject(0){|t,v| t + v}}.max || 0}
       badge.target = 1000000
+
+      badge.measure = lambda do |user|
+        user.unforked_repositories.map do |repo|
+          repo.languages.values.inject(0) { |t,v| t + v }
+        end.max || 0
+      end
     end
   end
 end
