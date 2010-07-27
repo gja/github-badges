@@ -1,9 +1,15 @@
 class Badge
   category "Code" do
-    badge "Polyglottonous" do |badge|
+    badge "Polyglot" do |badge|
       badge.description = "At least 5 programming languages across all non-forked repos"
       badge.measure = :language_count
       badge.target = 5
+    end
+
+    badge "Polygluttonous" do |badge|
+      badge.description = "At least 10 programming languages across all non-forked repos"
+      badge.measure = :language_count
+      badge.target = 10
     end
 
     badge "The Butterfly Effect" do |badge|
