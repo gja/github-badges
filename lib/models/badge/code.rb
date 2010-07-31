@@ -18,6 +18,12 @@ class Badge
       badge.target = 1
     end
 
+    badge "The Great Forker" do |badge|
+      badge.description = "Has at least one repository with no commits from the user"
+      badge.measure = :repositories_user_has_not_committed_to_count
+      badge.target = 1
+    end
+
     badge "The Butterfly Effect" do |badge|
       badge.description = "At least one unforked repository with a million lines of code"
       badge.target = 1000000

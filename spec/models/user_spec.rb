@@ -33,6 +33,16 @@ describe User do
     empty_repos = user.empty_repositories
 
     user.empty_repositories_count.should == 1
-    empty_repos.should include repo1
+    empty_repos.should == [repo1]
+  end
+
+  it "should be able to get a list of repos that user has not committed to" do
+    repo1 = stub(:commits => [stub(:author => {"login" => "someone_else"})])
+    repo2 = stub(:commits => [stub(:author => {"login" => "user"})])
+
+    user = User.new(stub(:login => "user", :repositories => [repo1, repo2]))
+
+    user.repositories_user_has_not_committed_to.should == [repo1]
+    user.repositories_user_has_not_committed_to_count.should == 1
   end
 end

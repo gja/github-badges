@@ -33,6 +33,14 @@ class User
     empty_repositories.length
   end
 
+  def repositories_user_has_not_committed_to
+    repositories.reject{|r| r.commits.any? {|c| c.author["login"] == self.login}}
+  end
+
+  def repositories_user_has_not_committed_to_count
+    repositories_user_has_not_committed_to.count
+  end
+
   private
 
     def merge_language_maps(maps)
