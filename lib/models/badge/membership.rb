@@ -29,6 +29,12 @@ class Badge
       badge.target = [ "mojombo", "defunkt", "pjhyett" ]
       badge.measure = :login
     end
+
+    badge "Shameless Plug" do |badge|
+      badge.description = "User helped with the github-badges app"
+      badge.target = [ "bguthrie", "gja", "mneedham" ]
+      badge.measure = :login
+    end
   end
 end
 
