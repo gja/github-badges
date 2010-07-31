@@ -24,6 +24,24 @@ class Badge
       badge.target = 1
     end
 
+    badge "A Helping Hand" do |badge|
+      badge.description = "A repository started by this user has a commit from someone else"
+      badge.target = 1
+      badge.measure = :unforked_repositories_which_others_have_comitted_to_count
+    end
+
+    badge "The Great Collaborator" do |badge|
+      badge.description = "Five repositories started by this user has a commit from someone else"
+      badge.target = 5
+      badge.measure = :unforked_repositories_which_others_have_comitted_to_count
+    end
+
+    badge "Damsel in Distress" do |badge|
+      badge.description = "Ten repositories started by this user has a commit from someone else"
+      badge.target = 10
+      badge.measure = :unforked_repositories_which_others_have_comitted_to_count
+    end
+
     badge "The Butterfly Effect" do |badge|
       badge.description = "At least one unforked repository with a million lines of code"
       badge.target = 1000000

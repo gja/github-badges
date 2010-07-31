@@ -41,6 +41,14 @@ class User
     repositories_user_has_not_committed_to.count
   end
 
+  def unforked_repositories_which_others_have_comitted_to
+    unforked_repositories.reject { |r| r.commits.all? {|c| c.author["login"] == self.login } }
+  end
+
+  def unforked_repositories_which_others_have_comitted_to_count
+    unforked_repositories_which_others_have_comitted_to.count
+  end
+
   private
 
     def merge_language_maps(maps)

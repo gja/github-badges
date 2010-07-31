@@ -45,4 +45,14 @@ describe User do
     user.repositories_user_has_not_committed_to.should == [repo1]
     user.repositories_user_has_not_committed_to_count.should == 1
   end
+
+  it "should be able to get a list of unforked repos that someone else has commited to" do
+    repo1 = stub(:fork => false, :commits => [stub(:author => {"login" => "someone_else"})])
+    repo2 = stub(:fork => false, :commits => [stub(:author => {"login" => "user"})])
+
+    user = User.new(stub(:login => "user", :repositories => [repo1, repo2]))
+
+    user.unforked_repositories_which_others_have_comitted_to.should == [repo1]
+    user.unforked_repositories_which_others_have_comitted_to_count.should == 1
+  end
 end
