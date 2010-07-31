@@ -12,6 +12,12 @@ class Badge
       badge.target = 10
     end
 
+    badge "Great Expectations" do |badge|
+      badge.description = "Has at least one empty repository"
+      badge.measure = :empty_repositories_count
+      badge.target = 1
+    end
+
     badge "The Butterfly Effect" do |badge|
       badge.description = "At least one unforked repository with a million lines of code"
       badge.target = 1000000

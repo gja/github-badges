@@ -25,6 +25,14 @@ class User
     repositories.reject(&:fork)
   end
 
+  def empty_repositories
+    repositories.select{|r| r.commits.empty? }
+  end
+
+  def empty_repositories_count
+    empty_repositories.length
+  end
+
   private
 
     def merge_language_maps(maps)

@@ -23,4 +23,16 @@ describe User do
 
     languages["Ruby"].should == 200
   end
+
+  it "should be able to get a list of empty repositories" do
+    repo1 = stub(:commits => [])
+    repo2 = stub(:commits => [stub, stub])
+    repo3 = stub(:commits => [stub])
+
+    user = User.new(stub(:repositories => [repo1, repo2, repo3]))
+    empty_repos = user.empty_repositories
+
+    user.empty_repositories_count.should == 1
+    empty_repos.should include repo1
+  end
 end
